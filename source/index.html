@@ -1,0 +1,17 @@
+---
+layout: default
+title: Home
+use: ["pages"]
+
+---
+
+Home
+
+
+
+<ul>
+{% for page in data.pages %}
+    <li>
+        <a href="{{ page.url }}">{{ page.title }}</a>
+    </li>
+{% endfor %}

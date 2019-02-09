@@ -1,19 +1,19 @@
 ---
 # Name of your project, will also be the vagrant box name
-project_name: "example"
+project_name: "gamestrafe"
 
 # Main hostname through which the vagrant box will be accessible
-hostname: "example.lo"
+hostname: "gamestrafe.test"
 # Alternative hostnames through which you want to access the vagrant box
 hostnames: []
 
 # Ports you want forwared to your host. See https://www.vagrantup.com/docs/networking/forwarded_ports.html
 # for details.
 forwarded_ports: {
-    "80": "8080",    # HTTP
-    "443": "8443",   # HTTPS
-    "3000": "3000",  # BrowserSync default port
+    "80": "8080"
 }
+
+php_version: "7.3"
 
 # Backingstore used by LXC. Defaults to dir. Uncomment and change this
 # value to suit your needs.
@@ -75,8 +75,8 @@ root_directory: "/vagrant/"
 # If you want to use ubuntu instead of debian (or any other box),
 # uncomment this. You can also replace "base" with "php7", if you need
 # php7 (with fpm and nginx) anyway.
-box_name: "drifter/stretch64-base"
-box_url: "https://vagrantbox-public.liip.ch/drifter-stretch64-base.json"
+box_name: "drifter/trusty64-php7"
+box_url: "https://vagrantbox-public.liip.ch/drifter-trusty64-php7.json"
 
 # Default Java version is 7. If you need another java version, uncomment
 # the matching line and set the correct value.
