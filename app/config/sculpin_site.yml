@@ -5,7 +5,7 @@ title: GameStrafe Portal
 subtitle: The opensource game network
 github_link: https://github.com/gamestrafe/gamestrafe.com
 
-#google_analytics_tracking_id: 1
+google_tag_manager_id: GTM-TDJJVPF
 
 # Insert your disqus shortname
 #disqus:
