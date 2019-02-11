@@ -28,3 +28,8 @@ deploy:
     on:
         # Only deploys on merges to master branch
         branch: master
+
+notifications:
+    slack:
+	    secure: "gcBFenoUPcbM4npL9kC37aQV2drcUs+Jrg8OvPFebqXTZpaPIkoomJOqfyFjgJmWwF945BXQKFkwovNY3lM4Tja8JqFNoePcAcAPwshSqNS5XJcN7Fxaucpp7hV2mi+Kxpvy1m+cmvUtOhIWqYtJ/v8NqBwpckLJ5QZR6i6rkjpswscW//U3/A5kDyhVfxqVNn+GskX9ZlSpKzqkdE0r5aVmOLcYlBvF6gdlaKsKeiaYvFsp0vtsERNOhs9mfCGIRuZLa8eXOi6QQRZA2/6mI5DkgnUt63y90t1NEMJYpfC0lUV6XeV4LkN6/jCmnFvAtIF+lUL7Q2gAAu8Yt1j/US5X5sd5KJrovvB6Fjrlo60u2hYoeyghrJXewyfysvJJ5zhY1bFmAV8ovFZBxf6CI5DT9cMQEkJQn6sGsHqim1cBmV7naB3rXBcYdSiR4Kbz5iK3LBTzDB8lkPBIMIdvJzDs+D7XNUfZXiorNDPJSBP4V1YKuUwwWQeEw/Pr7uvKjoy2Fn37lMkfBUpacXGsVE+FNHfNTW9svx8rV2+KZFTOWsGaEP3b+znErMDRMuiQk5etG3q/diLvfejGermFzJVrn1cnr/a4D9kMxlZKldUT/eUZKEOTWNxmJZ5H24pd+1RV8GlewKSoVXQ9mdYlbezRoRBRLF6RQ68L6PpnVnE="
+        
