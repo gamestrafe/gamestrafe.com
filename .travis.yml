@@ -7,26 +7,36 @@ install:
     - composer install
 
 script:
-    - vendor/sculpin/sculpin/bin/sculpin --env=prod generate
+    - vendor/bin/sculpin --env=prod generate
 
 # Will deploy pushes to master branch on the S3 bucket
 deploy:
-    provider: s3
-    # To store these securely, here is how to encrypt: https://docs.travis-ci.com/user/encryption-keys/
+  - provider: s3
+    # New Bucket
+    access_key_id:
+        secure: "MoI9LCXPDza70hQt//D/mB6ehy1VUbytkQQ8gYQmIANhPyHBK7Nr5cEOAAFoV6X8xMNGNTxRMyycF4AHxwsbjnSwpqBaUBIJvu/j7EDY1qvWAHg3hVNALXDP3CoSpsTzrKUXL8cLtCHQmHjNi1xzY6m53C5ZENq0mgQ2oHwlh2J3Ewf4sgdeadaAyQGo07036BruiE4u0pcj4XT33Fp6B9E9HR37dmsrHI8JNpAe78wt6W2S3yAOg19OmeHl7JiQdzgDPA66OI/9bcea2bC4VpkH94bKMoN7VMYNWWGNmASmBBAi1LNqWI8g6KBrDiTHNsh2yAiabkl9VOlkQQHRKQqeS3Z5MZnFjSov0B2HPGm/3jBvfrHqBiJXnHvcl8Aq7fN12wR4ou0XaKj9okjp0vfu2rpO4uvFcAP0/Rk6Qf9B2LZR5XzmGr7NU7yAMJe7+FvyOYBNECJgKi+qrxWYTs+FIZ9NFm808GqgghBT0fwAt5hTKU3X4nXGG50Ek0gZoLnM77LdLekt53N6mBZ5pNnGfDY4TTOmdUX2xgCtky2dco/9BY3cE4YBDnvaYjAnOB2Ga6Hrwtx0QqMyq1kee7VXGMGAXMc/nnIouXP3w0lkf4iAY9tCNX1Yvwop8ON2zzQD8Q2Ba0gS7rb8ggqLfJo4V/W80ievtvDUYSg/IXs="
+    secret_access_key:
+        secure: "JnpelQkmT6WO3DR1BpWATQybxdpBt+FzsisNZzIUFB9Vh7MaVV6cGm0GGHuV/TkA1zkSVwWJ3NUtw5AUFvFdszqCGh+nliK4pk52PrRnobARYPvjiIXyqBbzE5Oe5QInSn3TBw0njz6PQegVuOX2TpLWEOrPu2+C5pH4dO8PfTHfpMNPdhiGwUjOW76ZNr89q/ZSydbshRvAF5+2BSUfAWg5wofXEbMmgCiFdJDLeW0roBeBT3wefz19mdzYmzFpHA+rWdonodjDu3uZe7+iyJUMJUnzX9BAF87qdWHlxbQHaHi0OmsVxIOpOgqSLPsvKLd5eM1ZcVISwPqRY3rqJT1Jbi5xGMejHlQc2iU3WdztQKnpXSr3cbHr6KE9lWEbdDYehF7ZVtleYkY2lGDQdjR/V3YZ+T+Nfm4E4V1jPnINmOHmAxQipsJ1V8GBeSW/IWkPIyKeWcNEyJohHKXyTnoGvWoeSVRRoOWLxlmW2KR6+tj7o0/StpVoInh3uDhRBNt8TEuCgAzsdWXITmKkQbw5rprhuHWXPjxkwdulneSR077sF8rFnRyWXCUUYkDqYWeiEEXBm5VQMY45CHR165O04oCY967GrMgj7HfZhB8952sJh51mynyPwbu97w4vX1aIWw5L4YZ7s9wLG9/PlOCq8sSA69xOm3WbxsgQ47w="
+    bucket:
+        secure: "lGQawTt+tTlN0bkQAhpX6THlOPLoVbKVvqJ9NTqq/iSKNYvqkuFe6Gh0na3PINBzvoYF/TUxDC8OP8BXlwoJT8JkeixqyYl5iaXTidcwSpJnQjqTdiXb92+IIi2vq9H0ciAts1LVbUR2uo5nRiGkS7v0afQnA06IW//jIHSS+E5XXiO8LYud3l5JhYZCFRMeJvdCcPoaZLHLR3+4ksIrxj+W8BZG5MgeqpkW9Hj/XqSJAttPKBsWkY7ngpsrTlTCpxrp/oFjD0sr1gVEsJgkKPNKeBPiEbngHPtvxsh5HLQVswkTTUb0y0RYO97NXH8mhCvin9xzZmgm+iTfPdzfqv+cUqNXbq9TR+sSmCW2mhocq1ejKG0IVnjZcZ5OLBxWxOQPjS9VlQi4y77AHmCIMRc4s3scgbMH7N8Pp/6V6tOaVxaMqnqnMB/sXbKMUvr5ZTX5Zr/SYJx7hlDVDo0rBZbuqDT5o0I2SmeMKqmqXkp/QX8skhSzj/vT6pSSbgoVcj5fVCeKblV3020PAQlxV+4vK6htwhu9vw9YslMDdV2jxArS+RZdHwSN/BwbTSJCSJLigDaKVOTjdGf6C6c8wdCYE1aMZSZq6zxbD+RkEkaudgifL59XJvagdcUKxIu6SjwqU9wT/C7gVSTnTdPlagm242Y4APmXd5lYm2HbUd8="
+    region: "us-east-1"
+    skip_cleanup: true
+    local_dir: output_prod
+    on:
+        branch: master
+
+  - provider: s3
+    # Old Bucket
     access_key_id:
         secure: "msuGFxl27GWGXgH+0sd9eRNH2JkMxbNcLIb2+ueM0atdwmIIbwBNP/QPQ6vy8vNcarXRYMsiqXSxgNy4EXmb6TzCQbJibI08s+88M5MdkjxM07fFOA7utILFHFk4q/ImsrwEluC29AeK7nMD38VJtXc65Hhn6Gb87Z758+a0ucRmW7ZGWrhegK7E6/yQS9q+VgODwk11l+XkC3WoyrrAArSUatk8N8Egb2FzE9lmQN1YXIadU3zZEQgZE84bEjKjZNlTvi8PRIyzXWRCOJlqUYo4bw7dL4cK/YN9nMzD5pevxA+H9btNCE8RDDwSa2OX+rOKgb95hhYxve3wqvKFJwM/86ZHAyjwU1/yJc8fV/bdifvjchhb0tm16Z7oif72BSUNMuNuHh6E87Oz/YVSzT4kfCPxE3MBD9poDpMp+lKf48l4VENZ+1JQK5UJI9JLkypIvt7DWji4A/o6xLN/FRiCyXfKA/Ff2Szy/D/rNVCLeEpQHW7aoFzZ7rRjPi22NV4VETTmwXNuT3F/MzhL70+AG+xsQWNRPiZIBpwOP9sVUtyf7qCcf5S+JBR97jwVW0SYwgIZ/iuypi2Hdm+4V2S2NFCTWp50MpkIBEKYXruEUZaCxZDeLbBysCELPRlwiw+pfhNQQnWtTuHCQBwgiopPqfWZgfdaZgCoi7E66p0="
     secret_access_key:
         secure: "hOn/vaYgcj92ZtmST/Tdcuz5K6iM2cXpRSdSzHMYVAWSZrmlchIlfiHCXCHVLQ/ijDzw3VITwalVOAR2/6c/iIwi1bxWeZA6iS2m0mOiccIHXKBGDdC2rDrATm89Brl7saUGaLc6bccaDyEoeLYOs9PGHBnuwGYn3AXkR7g5DJZm4CU2O+9kezv3ci4Qnsqm3qiFnAGJb9AhVHDlI6ZmuERWydP/nE+J3RItWgJLV8kNb6ilS+RZJJm3bcEmw0I90pUIVN0bgSLkdazehyepeoJW1LpuR9d6o+66+Wey3+6jZrlTytA/q4VR/7x6uY4tgDgzeKAHkXLciu5bUsfK25ufUxhfLO+ApczXovGz5pA1lWMu97ApEtWOxzsMeCCY1nSEZv3HFnJ2sESzlcY5VjVs0utB7YUANgwTi6WedhM3ygP1kIvjZTFXUOKev1knMyBuy4AyYlEiAf4PnN9yzYsh5YmKMbwyBvE3XEoEQL/6RnDJCsKPpIBMqQ+EdG2v+VjIgNs2sb66AW3xLkJaqi1l68BFnAeFowKJHo8DEc4gj2/1hMpwN/+hyu2mRRcdqN9K9oaBijERK4I70tDLUujx7YjL9NDcllUeAyu5ljy/oap4iOu6+R01uLmWr2W/yKYEmsX2Q2afnioDRs3+rOLqeLjq6oikmrTYXnBqnUs="
     bucket:
         secure: "icC44cg/dV9cByexKTT2nH4sMBebSIdkxxL3eUjeEJtqtU9MSq3QuEqnVmUVltCLV02zmsIQm+CReFw7WgBRZRQ8BjmJ+HedU5cYreHlbOehdoSbDC5Vxphyt2ugyd+VNPZslc7sZrlzcyoKlTBdJ1WyrnrMbAKyXOoy12iBClAPVwFgoEgZ9Whgexvid0wXJ/HIDwDqWyhYtKyHQ5nDz8OWHwMuQRuly2eds0h7uAmbc24qZHFh8VIljn4tp8yGK/yAW1Us6cei+BZkxZQbosOEfbA9YTj3uKWLWoawWwQXhw2BWrFMptjXmRUmzKEwh1nIMlGpIwo+Z7cj/pV8jLO+snh9ihJjCdtWj0g3eitjY/C3JJnUw+Phw3Ip6s5K/3+SqrYMZUPPSnzjDm008gyNJ9sueDHuiaSFXTN9i7uIhC90HXgWnhlHI/S5uJJ8iW4PJYN018AqTT2zUltEHFIk3qTtFfUrZPpeG1StPzwJZ+gW5lPPEnhtd41+Vlo7/Jqvq6h2Iky4PHp5RSXBDUUJL0g/5GvyfuW+n/F6ohF56mp/t+XrTaFC2oUybzL24ibLDVPk2YhYSTetBTmKfct+YiWtQ1uE5v3tX+wme9vtvJNwzt6psd2EDUDY4pQeHEXUlYeUdr9JgBH4Xt76wR2QBBUuBCsMspPJwGa5Q/I="
-    # AWS Region for the bucket
     region: "us-east-1"
-    # IMPORTANT! If you don't do this then the above generated content will be wiped and you deploy nothing
     skip_cleanup: true
-    # The folder that is deployed, so everything inside this folder is deployed to the root of the bucket
     local_dir: output_prod
     on:
-        # Only deploys on merges to master branch
         branch: master
 
 notifications:
